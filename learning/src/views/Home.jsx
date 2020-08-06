@@ -1,30 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { CommandCard } from '../components/CommandCard';
+import React from 'react'
 import { Loader } from '../components/Loader';
+import { useFetchGet } from '../hooks/useFetchGet';
+import { CommandsList } from '../components/CommandsList';
 
 function Home() {
-
-    const [commands, setCommands] = useState({
-        loading: false,
-        data: null
-    });
-
     const apiUrl = 'https://localhost:5001/api/commands';
 
-    useEffect(() => {
-        setCommands({
-            loading: true,
-            data: null
-        });
-
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => setCommands({
-                loading: false,
-                data
-            }));
-    }, [apiUrl]);
-
+    const commands = useFetchGet(apiUrl);
 
     let pageContent;
 
@@ -35,15 +17,16 @@ function Home() {
             </div>
     }
 
-    if (commands.data) {
-        pageContent = commands.data.map(command =>
-            <CommandCard
-                key={command.id}
-                command={command}
-            />
-        );
+    if (commands.error) {
+        pageContent =
+            <span>
+                Something happened. Try again.
+            </span>
     }
 
+    if (commands.data) {
+        pageContent = <CommandsList commands={commands.data} />;
+    }
 
     return (
         <div>

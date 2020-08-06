@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom';
 import { Loader } from '../components/Loader';
+import { useFetchGet } from '../hooks/useFetchGet';
 
 function Command() {
 
@@ -10,39 +11,7 @@ function Command() {
 
     const apiUrl = `https://localhost:5001/api/commands/${id}`;
 
-    const [command, setCommand] = useState({
-        loading: false,
-        data: null,
-        error: false
-    });
-
-    useEffect(() => {
-        setCommand({
-            loading: true,
-            data: null,
-            error: false
-        });
-
-        fetch(apiUrl)
-            .then(response => {
-                if (!response.ok) {
-                    throw Error();
-                }
-                return response.json();
-            })
-            .then(data => {
-                setCommand({
-                    loading: false,
-                    data,
-                    error: false
-                }) }
-                , () =>
-                    setCommand({
-                        loading: false,
-                        data: null,
-                        error: true
-                    }));
-    }, [apiUrl]);
+    const command = useFetchGet(apiUrl);
 
     if (command.loading) {
         pageContent =
