@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faHome } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
 import { NavigationMenu } from './NavigationMenu';
 
@@ -8,16 +9,22 @@ function Navigation() {
 
     const [showMenu, setShowMenu] = useState(false);
 
-    let drawerMenuClass = 'nav-drawer-menu';
-    let menuMaskClass = 'nav-menu-mask';
-
-    if (!showMenu) {
-        menuMaskClass += ' nav-menu-mask-hide ';
-        drawerMenuClass += ' nav-drawer-menu-closed';
-    }
+    const drawerMenuClass = `nav-drawer-menu ${
+        showMenu ?
+        '' :
+        ' nav-drawer-menu-closed'}`;
+    const menuMaskClass = `nav-menu-mask ${
+        showMenu ?
+        '' :
+        ' nav-menu-mask-hide'}`;
 
     return (
         <nav>
+            <Link to='/' className='mr-05'>
+                <FontAwesomeIcon
+                    icon={faHome}
+                />
+            </Link>
             <FontAwesomeIcon
                 icon={faBars}
                 onClick={() => {

@@ -1,3 +1,37 @@
+:root {
+  --buttonWidth: 8rem;
+  --buttonHeight: 2.5rem
+}
+
+button {
+  width: calc(var(--buttonWidth));
+  height:calc(var(--buttonHeight));
+  background-color: #24CB7D;
+  outline: none;
+  border-style: none;
+  cursor: pointer;
+  border-radius: 1rem;
+  color:white;
+  text-transform: uppercase;
+  
+  transition: all 250ms ease-in;
+}
+
+button:hover {
+  transform: translateY(-.2rem);
+  box-shadow: 0 .2rem #dddddd;
+
+  transition: all 300ms;
+}
+
+button:active {
+  background-color: #24CB7Dcc;
+  border-radius: 1.5rem;
+  
+  transition: all 350ms ease-out;
+}
+
+
 .page-content {
   padding: 1.2rem;
 }
@@ -20,13 +54,24 @@
   top: 0;
   bottom: 0;
   z-index: 1;
-  width: 75%;
   background-color: white;
   box-shadow: 0 0 .5rem #dddddd;
   text-align: center;
   padding-top: 2rem;
 
   transition: all 500ms ease-in-out;
+}
+
+@media screen and (max-width: 1199px) {
+  .nav-drawer-menu {
+    width: 75%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .nav-drawer-menu {
+    width: 25%;
+  }
 }
 
 .nav-drawer-menu-closed {
@@ -183,4 +228,7 @@
 }
 .mt-15 {
   margin-top: 1.5rem
+}
+.mr-05 {
+  margin-right: .5rem;
 }
